@@ -66,7 +66,7 @@ const steps = [
     {
     type: "video",
     src: "images/sry.mp4",
-    caption: "Love you maya Video chai hera la unmute garera (SOUND FULL BANAU AND LAST SAMMA HERA LA)",
+    caption: "Surprise! (SOUND FULL BANAU AND LAST SAMMA HERA LA Please)",
     autoplay: true,
   controls: false,
  
