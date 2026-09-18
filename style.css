@@ -1,0 +1,396 @@
+/* ---------------------------------------------------------
+   Tokens
+   --------------------------------------------------------- */
+:root {
+  --bg-deep:    #0e0b1a;
+  --bg-mid:     #211a38;
+  --bg-glow:    #4b3468;
+  --accent:     #e3b873;
+  --accent-dim: #a9895a;
+  --text-hi:    #f6f2ff;
+  --text-lo:    rgba(246, 242, 255, 0.66);
+  --glass:      rgba(255, 255, 255, 0.06);
+  --glass-edge: rgba(255, 255, 255, 0.14);
+  --shadow:     0 30px 80px -20px rgba(0, 0, 0, 0.55);
+
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans:  "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+body {
+  font-family: var(--sans);
+  color: var(--text-hi);
+  background: radial-gradient(circle at 20% 15%, var(--bg-glow) 0%, transparent 55%),
+              radial-gradient(circle at 85% 80%, #2a1f45 0%, transparent 50%),
+              linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---------------------------------------------------------
+   Floating particles (decorative only)
+   --------------------------------------------------------- */
+.particles {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  bottom: -10vh;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--accent); /* shows briefly if the photo fails to load */
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  animation: drift linear infinite;
+}
+
+@keyframes drift {
+  from { transform: translateY(0) translateX(0); opacity: 0; }
+  10%  { opacity: 0.35; }
+  90%  { opacity: 0.2; }
+  to   { transform: translateY(-115vh) translateX(20px); opacity: 0; }
+}
+
+/* ---------------------------------------------------------
+   Stage / layout
+   --------------------------------------------------------- */
+.stage {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px 96px;
+}
+
+.stage__progress {
+  position: fixed;
+  top: 28px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+}
+
+.progress__count {
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  color: var(--text-lo);
+  font-variant-numeric: tabular-nums;
+}
+
+.progress__track {
+  width: 120px;
+  height: 3px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.progress__fill {
+  height: 100%;
+  width: 10%;
+  background: var(--accent);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+/* ---------------------------------------------------------
+   Landing screen
+   --------------------------------------------------------- */
+.landing {
+  max-width: 560px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  animation: rise 0.9s ease both;
+}
+
+.landing__kicker {
+  margin: 0;
+  font-size:25px;
+  color: var(--text-lo);
+  color: pink;
+}
+
+.landing__title {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(32px, 6vw, 52px);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* ---------------------------------------------------------
+   Card
+   --------------------------------------------------------- */
+.card-wrap {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.card {
+  width: 100%;
+  min-height: 320px;
+  border-radius: 28px;
+  background: var(--glass);
+  border: 1px solid var(--glass-edge);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.card__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+}
+
+.card__content.enter {
+  animation: rise 0.6s ease both;
+}
+
+.card__title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(22px, 4vw, 28px);
+  line-height: 1.4;
+  margin: 0;
+  max-width: 420px;
+}
+
+.card__title--final {
+  font-style: normal;
+  font-size: clamp(26px, 5vw, 34px);
+}
+
+.card__caption {
+  color: pink;
+  font-size: 25pxpx;
+  margin: 0;
+  max-width: 380px;
+  text-decoration: underline;
+}
+
+/* Media */
+.card__media-frame {
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--glass-edge);
+}
+
+.card__media-frame img,
+.card__media-frame video {
+  display: block;
+  width: 100%;
+  max-height: 340px;
+  object-fit: cover;
+  animation: mediaReveal 0.9s ease both;
+}
+
+.card__media-frame--zoom img { animation-name: zoomReveal; }
+.card__media-frame--slide img { animation-name: slideReveal; }
+
+.card__placeholder {
+  width: 100%;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--text-lo);
+  font-size: 14px;
+  background: repeating-linear-gradient(
+    135deg, rgba(255,255,255,0.04) 0 12px, transparent 12px 24px
+  );
+}
+
+.card__placeholder-icon {
+  font-size: 28px;
+  opacity: 0.7;
+}
+
+/* Camera step */
+.camera-preview {
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--glass-edge);
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-preview video {
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+}
+
+.camera-status {
+  font-size: 14px;
+  color: var(--text-lo);
+  min-height: 20px;
+}
+
+/* ---------------------------------------------------------
+   Buttons
+   --------------------------------------------------------- */
+.btn {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 13px 28px;
+  margin: 10px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: #241a0a;
+  box-shadow: 0 12px 30px -10px rgba(227, 184, 115, 0.55);
+}
+
+.btn--primary:hover { transform: translateY(-2px); }
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text-lo);
+  border: 1px solid var(--glass-edge);
+}
+
+.btn--ghost:hover {
+  color: var(--text-hi);
+  border-color: var(--text-lo);
+}
+
+.card-nav {
+  display: flex;
+  gap: 14px;
+}
+
+/* ---------------------------------------------------------
+   Bottom progress bar
+   --------------------------------------------------------- */
+.bottom-bar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  z-index: 3;
+}
+
+.bottom-bar__fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+  transition: width 0.5s ease;
+}
+
+/* ---------------------------------------------------------
+   Transitions between steps
+   --------------------------------------------------------- */
+.fade-out {
+  animation: fadeOut 0.35s ease both;
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; transform: translateY(-8px) scale(0.98); }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mediaReveal {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zoomReveal {
+  from { opacity: 0; transform: scale(1.12); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideReveal {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ---------------------------------------------------------
+   Responsive
+   --------------------------------------------------------- */
+@media (max-width: 480px) {
+  .card {
+    padding: 36px 24px;
+    border-radius: 22px;
+  }
+  .landing__title {
+    font-size: 28px;
+  }
+}

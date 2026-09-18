@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Something to Tell You</title>
+
+  <!-- Fonts: a warm display serif for the big reveal moments, a quiet sans for everything else -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Drifting particles live behind everything, purely decorative -->
+  <div class="particles" id="particles" aria-hidden="true"></div>
+
+  <main class="stage">
+
+    <!-- Top progress: step count + dotted bar -->
+    <header class="stage__progress" id="progressHeader" hidden>
+      <span class="progress__count" id="progressCount">1 / 10</span>
+      <div class="progress__track">
+        <div class="progress__fill" id="progressFill"></div>
+      </div>
+    </header>
+
+    <!-- Landing screen -->
+    <section class="landing" id="landing">
+      <p class="landing__kicker">Dear Mayaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+      <h1 class="landing__title">It’s been 3 years since we became us. ❤️
+
+</h1>
+      <button class="btn btn--primary " id="startBtn">Start</button>
+    </section>
+
+    <!-- The card where every step renders -->
+    <section class="card-wrap" id="cardWrap" hidden>
+      <div class="card" id="card">
+          <p>Hotel gako ho , and i know tmlai naramro lagyo hola sorry babe... Trust me aaba gardina ,and I can’t imagine my life without you. I miss you more than anything right now.
+To be honest, I miss you every single time. ❤️
+ Three years… it honestly feels like such a long time, yet when I think about everything we’ve been through together, it also feels like yesterday.
+
+We’ve shared so many moments—happy ones, difficult ones, stupid fights, beautiful memories, and countless little moments that only you and I can truly understand.
+
+Three years with you has given me memories that I’ll always carry with me.
+
+And I know you’re angry with me right now. I know things between us aren’t okay at this moment. But before I say anything else, I just want to remember what today means to me.</p>      </div>
+
+      <div class="card-nav">
+        <button class="btn btn--ghost" id="backBtn" hidden>&larr; Back</button>
+        <button class="btn btn--primary" id="nextBtn">Next &rarr;</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom progress bar, distinct from the top counter -->
+  <div class="bottom-bar" id="bottomBar" hidden>
+    <div class="bottom-bar__fill" id="bottomBarFill"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
